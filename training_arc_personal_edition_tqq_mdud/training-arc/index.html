@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="Training Arc — painel pessoal de musculação, XP, missões e evolução.">
+  <title>Training Arc — Personal Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#dashboard" data-view-link="dashboard" aria-label="Training Arc início">
+        <span class="brand-mark">TA<span>+</span></span>
+        <span><strong>TRAINING ARC</strong><small>PERSONAL EDITION</small></span>
+      </a>
+      <div class="sidebar-label">SUA JORNADA</div>
+      <nav class="side-nav">
+        <button class="nav-link active" data-view="dashboard"><span class="nav-icon">◈</span> Dashboard</button>
+        <button class="nav-link" data-view="workout"><span class="nav-icon">⚔</span> Treinamento</button>
+        <button class="nav-link" data-view="quests"><span class="nav-icon">✧</span> Missões</button>
+        <button class="nav-link" data-view="history"><span class="nav-icon">◷</span> Histórico</button>
+        <button class="nav-link" data-view="settings"><span class="nav-icon">⚙</span> Configurações</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-rank"><span class="rank-glyph">✦</span><div><small>RANK ATUAL</small><strong id="sidebarRank">NOVATO</strong></div></div>
+        <div class="sidebar-xp"><div class="progress-track"><span id="sidebarXpBar"></span></div><small id="sidebarXpText">0 XP</small></div>
+        <p class="sidebar-motto">Um set de cada vez.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">TA<span>+</span></span><strong>TRAINING ARC</strong></div>
+        <div class="breadcrumb"><span>SYSTEM</span><i>/</i><strong id="pageLabel">DASHBOARD</strong></div>
+        <div class="topbar-right"><span class="online-dot"></span><span class="system-status">SYSTEM ONLINE</span><button class="icon-button" id="quickSettings" aria-label="Abrir configurações">⚙</button></div>
+      </header>
+
+      <section class="view active" id="view-dashboard" aria-labelledby="dashboardTitle">
+        <div class="welcome-row">
+          <div><p class="eyebrow"><span class="eyebrow-line"></span> SEU ARCO DE EVOLUÇÃO</p><h1 id="dashboardTitle">E aí, protagonista<span class="purple">.</span></h1><p class="muted" id="currentDate">Preparando seu próximo capítulo...</p></div>
+          <button class="companion-chip" id="openCompanions"><span class="companion-orb" id="companionOrb">M</span><span><small>COMPANHEIRA</small><strong id="companionName">Miku</strong></span><span class="chip-edit">✎</span></button>
+        </div>
+
+        <article class="level-card panel">
+          <div class="level-card-bg" aria-hidden="true"></div>
+          <div class="level-info"><div class="rank-pill"><span class="rank-spark">✦</span> <span id="rankLabel">RANK E · NOVATO</span></div><h2>Seu poder está<br><span class="gradient-text">evoluindo.</span></h2><p id="rankQuote">Sua jornada começa com a próxima repetição.</p><div class="xp-line"><span><strong id="xpTotal">0</strong> XP TOTAL</span><span id="xpNextLabel">0 / 300 XP</span></div><div class="progress-track big"><span id="mainXpBar"></span></div><div class="level-foot"><span id="levelLabel">NÍVEL 1</span><span id="nextLevelHint">Próximo nível: 300 XP</span></div></div>
+          <div class="level-emblem"><div class="emblem-ring"><span id="levelNumber">01</span><small>LEVEL</small></div><div class="emblem-stars">✦　✧　✦</div></div>
+          <div class="level-card-corner">TRAINING ARC // PROTOCOL 01</div>
+        </article>
+
+        <div class="section-heading"><div><p class="eyebrow">PLANO DE BATALHA</p><h2>Missão de hoje</h2></div><button class="text-button" data-view="workout">Ver rotina <span>↗</span></button></div>
+        <article class="daily-card panel" id="dailyWorkoutCard">
+          <div class="daily-photo photo-upper" id="dailyPhoto"><div class="photo-overlay"></div><span class="photo-tag" id="dailyTag">UPPER A</span></div>
+          <div class="daily-content"><div class="daily-meta"><span class="tag-dot"></span><span id="dailyStatus">TREINO PROGRAMADO</span><span class="meta-separator">•</span><span id="dailyDuration">~50 MIN</span></div><h3 id="dailyWorkoutName">Upper A <span class="muted-inline">/ Força superior</span></h3><p class="muted" id="dailyDescription">Construa força com controle, foco e consistência.</p><div class="daily-bottom"><span class="exercise-count"><strong id="dailyExerciseCount">6</strong> exercícios <span class="meta-separator">·</span> 90s de descanso</span><button id="startToday" class="primary-button"><span>⚡</span> INICIAR TREINO</button></div></div>
+        </article>
+
+        <div class="stats-grid">
+          <article class="stat-card panel"><div class="stat-top"><span class="stat-icon purple-icon">⚔</span><span class="stat-label">TREINOS CONCLUÍDOS</span></div><strong class="stat-value" id="statWorkouts">0</strong><span class="stat-note">Cada sessão conta.</span></article>
+          <article class="stat-card panel"><div class="stat-top"><span class="stat-icon green-icon">↗</span><span class="stat-label">VOLUME ESTA SEMANA</span></div><strong class="stat-value"><span id="statVolume">0</span><small> kg</small></strong><span class="stat-note">Carga × repetições registradas</span></article>
+          <article class="stat-card panel"><div class="stat-top"><span class="stat-icon pink-icon">✧</span><span class="stat-label">SEQUÊNCIA</span></div><strong class="stat-value"><span id="statStreak">0</span><small> sem.</small></strong><span class="stat-note">Sem pressão: constância, não perfeição.</span></article>
+        </div>
+
+        <div class="lower-grid">
+          <section class="panel week-panel"><div class="panel-heading"><div><p class="eyebrow">CONSISTÊNCIA</p><h2>Esta semana</h2></div><span class="week-badge" id="weekCount">0 / 4</span></div><div class="week-days" id="weekDays"></div><div class="week-progress-copy"><span id="weekCopy">Seu progresso aparece aqui.</span><strong id="weekPercent">0%</strong></div><div class="progress-track"><span id="weekProgressBar"></span></div></section>
+          <section class="panel quest-preview"><div class="panel-heading"><div><p class="eyebrow">OBJETIVO ATIVO</p><h2>Missão semanal</h2></div><span class="quest-symbol">✧</span></div><div class="quest-feature-icon">🎯</div><h3>Guerreiro consistente</h3><p class="muted">Conclua 4 sessões planejadas nesta semana. Sem compensar treinos perdidos com sessões dobradas.</p><div class="quest-progress-label"><span id="questPreviewText">0 de 4 treinos</span><strong id="questPreviewPercent">0%</strong></div><div class="progress-track"><span id="questPreviewBar"></span></div><button class="text-button quest-link" data-view="quests">Todas as missões <span>↗</span></button></section>
+        </div>
+        <section class="panel companion-quote"><div class="quote-orb" id="quoteOrb">M</div><div class="quote-copy"><p class="eyebrow">RECADO DA COMPANHEIRA</p><blockquote id="companionQuote">“Você consegue! Vamos no seu ritmo e com boa execução.”</blockquote><span id="quoteAttribution">— Miku Nakano</span></div><button class="icon-button quote-change" id="changeQuote" aria-label="Trocar frase">↻</button></section>
+
+        <section class="panel character-gallery" aria-labelledby="characterGalleryTitle">
+          <div class="panel-heading gallery-heading"><div><p class="eyebrow">ANIME COMPANION ARCHIVE</p><h2 id="characterGalleryTitle">Escolha sua parceira de treino</h2><p class="muted gallery-subtitle">TQQ + My Dress-Up Darling · toque em uma personagem para colocá-la em destaque.</p></div><span class="gallery-badge">6 PERSONAGENS</span></div>
+          <div class="character-gallery-grid" id="characterGallery" aria-live="polite"></div>
+          <p class="image-credit">Imagens oficiais vinculadas aos sites das obras; é necessário estar conectado à internet para carregá-las.</p>
+        </section>
+      </section>
+
+      <section class="view" id="view-workout" aria-labelledby="workoutTitle">
+        <div class="page-intro"><div><p class="eyebrow">ACTIVE BATTLE MODE</p><h1 id="workoutTitle">Central de treino<span class="purple">.</span></h1><p class="muted">Registre seu esforço, acompanhe o descanso e deixe o histórico falar.</p></div><span class="protocol-chip"><span class="online-dot"></span> REST TIMER · 01:30</span></div>
+        <div class="routine-tabs" id="routineTabs"><button class="routine-tab active" data-routine="upperA">Upper A</button><button class="routine-tab" data-routine="lowerA">Lower A</button><button class="routine-tab" data-routine="upperB">Upper B</button><button class="routine-tab" data-routine="lowerB">Lower B</button></div>
+        <div class="routine-hero panel" id="routineHero"><div class="routine-hero-image photo-upper" id="routineHeroImage"></div><div class="routine-hero-content"><span class="eyebrow" id="routineSubtitle">SEGUNDA · FORÇA SUPERIOR</span><h2 id="routineName">Upper A</h2><p id="routineIntro" class="muted">Movimentos controlados, repetição por repetição.</p><div class="routine-meta"><span>◈ <strong id="routineExerciseCount">6</strong> exercícios</span><span>◷ Descanso de 90s</span><span>✦ XP por série</span></div><button id="startRoutine" class="primary-button"><span>⚡</span> INICIAR SESSÃO</button></div></div>
+        <div class="session-toolbar" id="sessionToolbar" hidden><div><span class="eyebrow">SESSÃO EM ANDAMENTO</span><strong id="sessionTimer">00:00</strong><small id="sessionProgress">0 / 6 exercícios</small></div><button class="subtle-button" id="discardSession">Descartar sessão</button></div>
+        <div id="exerciseList" class="exercise-list"></div>
+        <div class="session-finish-wrap" id="finishWrap" hidden><label class="field-label" for="sessionNotes">ANOTAÇÕES DA SESSÃO</label><textarea id="sessionNotes" placeholder="Como foi o treino? Energia, execução, observações..." rows="3"></textarea><button class="primary-button finish-button" id="finishWorkout">✦ FINALIZAR TREINAMENTO</button></div>
+        <aside class="safety-note panel"><span class="safety-icon">ⓘ</span><div><strong>Treine com consciência</strong><p>Se houver dor aguda, tontura ou mal-estar, interrompa a sessão. O terra romeno não deve ser feito com dor lombar ou posterior da coxa. Adapte com orientação profissional.</p></div></aside>
+      </section>
+
+      <section class="view" id="view-quests" aria-labelledby="questsTitle">
+        <div class="page-intro"><div><p class="eyebrow">QUEST LOG</p><h1 id="questsTitle">Missões & conquistas<span class="purple">.</span></h1><p class="muted">XP vem de consistência e registros reais, não de apertar o botão sem treinar.</p></div><div class="quest-xp-summary"><span>XP TOTAL</span><strong id="questXpTotal">0</strong></div></div>
+        <div class="quest-level-panel panel"><div class="quest-level-glyph">✦</div><div><span class="eyebrow">RUMO AO PRÓXIMO RANK</span><h2 id="questLevelTitle">Novato em treinamento</h2><p class="muted" id="questLevelText">Complete sessões e registre suas séries para ganhar XP.</p></div><div class="quest-level-progress"><strong id="questLevelProgress">0%</strong><div class="progress-track"><span id="questLevelBar"></span></div></div></div>
+        <div class="section-heading standalone"><div><p class="eyebrow">DESAFIOS DESTA SEMANA</p><h2>Quests ativas</h2></div></div>
+        <div class="quests-grid" id="questsGrid"></div>
+        <div class="section-heading standalone"><div><p class="eyebrow">SEU INVENTÁRIO</p><h2>Conquistas desbloqueadas</h2></div></div>
+        <div class="achievements-grid" id="achievementsGrid"></div>
+      </section>
+
+      <section class="view" id="view-history" aria-labelledby="historyTitle">
+        <div class="page-intro"><div><p class="eyebrow">MEMORY ARCHIVE</p><h1>Registro de evolução<span class="purple">.</span></h1><p class="muted">Seus treinos, números e pequenas vitórias em um só lugar.</p></div><button class="subtle-button" id="exportHistory">↓ Exportar JSON</button></div>
+        <div class="history-stats stats-grid"><article class="stat-card panel"><span class="stat-label">SESSÕES SALVAS</span><strong class="stat-value" id="historyTotal">0</strong></article><article class="stat-card panel"><span class="stat-label">VOLUME TOTAL</span><strong class="stat-value"><span id="historyVolume">0</span><small> kg</small></strong></article><article class="stat-card panel"><span class="stat-label">XP CONQUISTADO</span><strong class="stat-value" id="historyXp">0</strong></article></div>
+        <section class="panel chart-panel"><div class="panel-heading"><div><p class="eyebrow">PROGRESSO DE CARGA</p><h2>Volume por sessão</h2></div><span class="chart-legend"><i></i> kg × reps</span></div><div class="chart-wrap"><canvas id="volumeChart" aria-label="Gráfico de volume das últimas sessões"></canvas><p class="chart-empty" id="chartEmpty">Finalize seu primeiro treino para começar o gráfico.</p></div></section>
+        <section class="panel history-panel"><div class="panel-heading"><div><p class="eyebrow">SEU CAMINHO</p><h2>Treinos anteriores</h2></div><span class="history-count" id="historyCount">0 registros</span></div><div id="historyList" class="history-list"></div></section>
+      </section>
+
+      <section class="view" id="view-settings" aria-labelledby="settingsTitle">
+        <div class="page-intro"><div><p class="eyebrow">SYSTEM CONFIGURATION</p><h1>Configurações<span class="purple">.</span></h1><p class="muted">Seus dados pertencem a você.</p></div></div>
+        <section class="panel settings-card"><div class="settings-heading"><div class="settings-icon">✦</div><div><h2>Companheira em destaque</h2><p class="muted">Escolha quem aparece no seu dashboard.</p></div></div><div class="companion-options" id="settingsCompanions"></div></section>
+        <section class="panel settings-card"><div class="settings-heading"><div class="settings-icon">⇧</div><div><h2>Backup e dados</h2><p class="muted">Os registros ficam salvos neste navegador, usando localStorage.</p></div></div><div class="settings-actions"><button class="primary-button" id="exportBackup">↓ EXPORTAR BACKUP JSON</button><label class="subtle-button file-button">↑ IMPORTAR BACKUP JSON<input type="file" id="importBackup" accept="application/json,.json" hidden></label></div><p class="settings-hint">O armazenamento local não sincroniza automaticamente entre dispositivos ou navegadores. Exporte backups regularmente.</p></section>
+        <section class="panel settings-card"><div class="settings-heading"><div class="settings-icon warning-icon">!</div><div><h2>Zona de perigo</h2><p class="muted">Ações irreversíveis exigem confirmação.</p></div></div><button class="danger-button" id="resetData">Resetar todos os dados</button></section>
+        <section class="panel safety-full"><p class="eyebrow">PROTOCOLO DE SEGURANÇA</p><h2>Seu treino vem com responsabilidade.</h2><p>Se você tem diabetes tipo 1, siga o plano individual indicado pela sua equipe de saúde para verificar a glicose antes, durante e depois do treino. Tenha por perto a fonte de carboidrato de ação rápida recomendada no seu plano e mantenha-se hidratado.</p><p><strong>Este aplicativo não calcula nem sugere doses de insulina. Siga rigorosamente as orientações do seu endocrinologista e equipe de saúde.</strong></p><p>Interrompa o exercício em caso de sintomas preocupantes, possível hipoglicemia, tontura, mal-estar ou dor articular aguda. Siga seu plano pessoal de segurança.</p></section>
+        <footer class="app-footer">TRAINING ARC <span>v1.0 · BUILT FOR YOUR NEXT LEVEL</span></footer>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navegação mobile"><button class="mobile-nav-link active" data-view="dashboard"><span>◈</span><small>Início</small></button><button class="mobile-nav-link" data-view="workout"><span>⚔</span><small>Treino</small></button><button class="mobile-nav-link" data-view="quests"><span>✧</span><small>Missões</small></button><button class="mobile-nav-link" data-view="history"><span>◷</span><small>Histórico</small></button><button class="mobile-nav-link" data-view="settings"><span>⚙</span><small>Ajustes</small></button></nav>
+
+  <div class="rest-widget" id="restWidget" hidden aria-live="polite"><div class="rest-widget-top"><span class="rest-pulse"></span><span>DESCANSO</span><button id="closeRest" aria-label="Fechar cronômetro">×</button></div><strong id="restClock">01:30</strong><div class="rest-progress"><span id="restProgress"></span></div><div class="rest-actions"><button id="restPause">Pausar</button><button id="restAdd">+30s</button><button id="restSkip">Pular</button></div></div>
+
+  <dialog id="companionDialog" class="modal"><form method="dialog"><div class="modal-heading"><div><p class="eyebrow">SUPPORT SYSTEM</p><h2>Escolha sua companheira</h2></div><button class="icon-button modal-close" aria-label="Fechar">×</button></div><p class="muted">Uma pequena mensagem pra acompanhar seu próximo set.</p><div class="companion-options" id="modalCompanions"></div><button class="primary-button modal-done" id="closeCompanionDialog">CONFIRMAR ESCOLHA</button></form></dialog>
+  <dialog id="victoryDialog" class="modal victory-modal"><form method="dialog"><div class="victory-spark">✦</div><p class="eyebrow">QUEST COMPLETE</p><h2 id="victoryTitle">Sessão concluída!</h2><p id="victoryCopy" class="muted">Mais um capítulo da sua evolução.</p><div class="victory-xp"><span>XP RECEBIDO</span><strong id="victoryXp">+0</strong></div><div class="victory-rewards" id="victoryRewards"></div><button class="primary-button" id="closeVictory">CONTINUAR JORNADA</button></form></dialog>
+  <dialog id="confirmDialog" class="modal"><form method="dialog"><div class="modal-heading"><div><p class="eyebrow">CONFIRM ACTION</p><h2 id="confirmTitle">Tem certeza?</h2></div><button class="icon-button modal-close" aria-label="Fechar">×</button></div><p class="muted" id="confirmText">Esta ação não pode ser desfeita.</p><div class="confirm-actions"><button class="subtle-button" value="cancel">Cancelar</button><button class="danger-button" id="confirmProceed" value="confirm">Confirmar</button></div></form></dialog>
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
